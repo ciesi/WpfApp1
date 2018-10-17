@@ -178,7 +178,7 @@ namespace WpfApp1
                 case RechenZeichen.keinInput:
                     break;
             }
-            txtDisplay.Text = x.ToString();
+            txtZahl1.Text = x.ToString();
             txtHistory.Text = textMessage;
 
         }
