@@ -49,7 +49,7 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="728,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="728,143,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <TextBlock x:Name="txtHistory" HorizontalAlignment="Left" Margin="96,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="286"/>
-        <TextBlock x:Name="txtZahl1" HorizontalAlignment="Left" Margin="387,84,0,0" TextWrapping="Wrap" Text="Ergebnis" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtZahl1" HorizontalAlignment="Left" Margin="387,84,0,0" TextWrapping="Wrap" Text="Ergebnis" VerticalAlignment="Top" FontSize="24"/>
         <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="186,392,0,0" VerticalAlignment="Top" Width="89" Height="40" Click="buttonClear_Click" RenderTransformOrigin="0.445,3.235"/>
 
     </Grid>

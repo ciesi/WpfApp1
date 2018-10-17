@@ -23,8 +23,8 @@ namespace WpfApp1
     {
 
 
-        int x;
-        int y = 0;
+        decimal x;
+        decimal y = 0;
         string textMessage;
         //string anzeige;
 
@@ -47,37 +47,27 @@ namespace WpfApp1
         // List<int> zahlenAufzählen = new List<int>();
 
 
-
-        void MethodeZahlenTippen(int z)
+        void MethodeZahlenTippen(decimal z)
         {
-            //x = Convert.ToInt32(textBlock.Text);
             //List<int> zahlenAufzählen = new List<int>();
-
+            //txtDisplay.Text = z.ToString();
             x = x * 10 + z;
-
-
-            // textBlockGleichung.Text = textBlock.Text + anzeige;
             txtDisplay.Text = x.ToString();
-            //textBlockGleichung.Text = z.ToString();
-            //textMessage = x.ToString();
-            //textBlockGleichung.Text = textMessage;
-
-
+            //txtDisplay.Text = txtDisplay.Text + z.ToString();
+            //x = Convert.ToDecimal(txtDisplay);
+          ///////////////////////////////////////////////////////Zahl
         }
         private void button0_Click(object sender, RoutedEventArgs e)
         {
             MethodeZahlenTippen(0);
-
         }
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             MethodeZahlenTippen(1);
-
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             MethodeZahlenTippen(2);
-
         }
         private void button3_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +77,6 @@ namespace WpfApp1
         private void button4_Click(object sender, RoutedEventArgs e)
         {
             MethodeZahlenTippen(4);
-
         }
         private void button5_Click(object sender, RoutedEventArgs e)
         {
@@ -116,42 +105,40 @@ namespace WpfApp1
             click = RechenZeichen.Clear;
             y = 0;
             x = 0;
-            txtDisplay.Text = x.ToString();
+            txtDisplay.Text = "";
             txtHistory.Text = "";
-
-
         }
         private void buttonGeteilt_Click(object sender, RoutedEventArgs e)
         {
             click = RechenZeichen.Geteilt;
-            y = Convert.ToInt32(txtDisplay.Text);
+            y = x;
             x = 0;
-            textMessage = y.ToString() + " / ";
-            txtHistory.Text = textMessage;
+            txtHistory.Text = y.ToString() + " / ";
+            //txtHistory.Text = textMessage;
         }
         private void buttonMal_Click(object sender, RoutedEventArgs e)
         {
             click = RechenZeichen.Mal;
-            y = Convert.ToInt32(txtDisplay.Text);
+            y = x;
             x = 0;
-            textMessage = y.ToString() + " * ";
-            txtHistory.Text = textMessage;
+            txtHistory.Text = y.ToString() + " * ";
+            //txtHistory.Text = textMessage;
         }
         private void buttonPlus_Click(object sender, RoutedEventArgs e)
         {
             click = RechenZeichen.Plus;
-            y = Convert.ToInt32(txtDisplay.Text);
+            y = x;
             x = 0;
-            textMessage = y.ToString() + " + ";
-            txtHistory.Text = textMessage;
+            txtHistory.Text = y.ToString() + " + ";
+            //txtHistory.Text = textMessage;
         }
         private void buttonMinus_Click(object sender, RoutedEventArgs e)
         {
             click = RechenZeichen.Minus;
-            y = Convert.ToInt32(txtDisplay.Text);
+            y = x;
             x = 0;
-            textMessage = y.ToString() + " - ";
-            txtHistory.Text = textMessage;
+            txtHistory.Text = y.ToString() + " - ";
+            //txtHistory.Text = textMessage;
         }
 
         private void buttonGleich_Click(object sender, RoutedEventArgs e)
@@ -180,6 +167,7 @@ namespace WpfApp1
             }
             txtZahl1.Text = x.ToString();
             txtHistory.Text = textMessage;
+            txtDisplay.Text = "";
 
         }
 
