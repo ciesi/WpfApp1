@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,46 +17,42 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
+    public enum RechenZeichen
+    {
+        Plus,
+        Minus,
+        Mal,
+        Geteilt,
+        Gleich,
+
+    }
+
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IList<Tuple<ICalcFactor, RechenZeichen>> _zahlen = new List<Tuple<ICalcFactor, RechenZeichen>>();
 
 
-        decimal x;
-        decimal y = 0;
-        string textMessage;
-        //string anzeige;
 
-
-        enum RechenZeichen
-        {
-            Plus,
-            Minus,
-            Mal,
-            Geteilt,
-            keinInput,
-            Clear
-        }
-        RechenZeichen click = RechenZeichen.keinInput;
 
         public MainWindow()
         {
             InitializeComponent();
         }
-        // List<int> zahlenAufzählen = new List<int>();
+        List<decimal> zahlenErinnern = new List<decimal>();
 
 
         void MethodeZahlenTippen(decimal z)
         {
-            //List<int> zahlenAufzählen = new List<int>();
-            //txtDisplay.Text = z.ToString();
-            x = x * 10 + z;
-            txtDisplay.Text = x.ToString();
-            //txtDisplay.Text = txtDisplay.Text + z.ToString();
-            //x = Convert.ToDecimal(txtDisplay);
-          ///////////////////////////////////////////////////////Zahl
+            if (_isResult)
+            {
+                txtDisplay.Text = string.Empty;
+                _isResult = false;
+            }
+
+            txtDisplay.Text += z.ToString();
         }
         private void button0_Click(object sender, RoutedEventArgs e)
         {
@@ -102,73 +99,123 @@ namespace WpfApp1
         //////////////////////////////////////////////// RechnenButton
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
-            click = RechenZeichen.Clear;
-            y = 0;
-            x = 0;
-            txtDisplay.Text = "";
-            txtHistory.Text = "";
+            _zahlen.Clear();
+            GenerateHistory();
+
         }
         private void buttonGeteilt_Click(object sender, RoutedEventArgs e)
         {
-            click = RechenZeichen.Geteilt;
-            y = x;
-            x = 0;
-            txtHistory.Text = y.ToString() + " / ";
-            //txtHistory.Text = textMessage;
+            decimal value = decimal.Parse(txtDisplay.Text);
+            Tuple<ICalcFactor, RechenZeichen> item = new Tuple<ICalcFactor, RechenZeichen>(new SimpleCalcFactor(value), RechenZeichen.Geteilt);
+
+            _zahlen.Add(item);
+            GenerateHistory();
         }
+
+        private void GenerateHistory()
+        {
+            txtDisplay.Text = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            foreach (Tuple<ICalcFactor, RechenZeichen> item in _zahlen)
+            {
+                sb.AppendFormat(CultureInfo.CurrentCulture, "{0} ", item.Item1.ValuePresentation);
+                switch (item.Item2)
+                {
+                    case RechenZeichen.Plus:
+                        sb.Append(" + ");
+                        break;
+                    case RechenZeichen.Minus:
+                        sb.Append(" - ");
+                        break;
+                    case RechenZeichen.Mal:
+                        sb.Append(" * ");
+                        break;
+                    case RechenZeichen.Geteilt:
+                        sb.Append(" / ");
+                        break;
+                    case RechenZeichen.Gleich:
+                        sb.Append(" =");
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            txtHistory.Text = sb.ToString();
+
+            decimal val = 0m;
+            RechenZeichen? zeichen = null;
+            foreach (Tuple<ICalcFactor, RechenZeichen> item in _zahlen)
+            {
+                if (zeichen.HasValue)
+                {
+                    switch (zeichen.Value)
+                    {
+                        case RechenZeichen.Plus:
+                            val += item.Item1.Value;
+                            break;
+                        case RechenZeichen.Minus:
+                            val -= item.Item1.Value;
+                            break;
+                        case RechenZeichen.Mal:
+                            val *= item.Item1.Value;
+                            break;
+                        case RechenZeichen.Geteilt:
+                            val /= item.Item1.Value;
+                            break;
+
+                    }
+                }
+                else
+                    val = item.Item1.Value;
+                zeichen = item.Item2;
+
+            }
+
+            txtDisplay.Text = val.ToString();
+            _isResult = true;
+        }
+
+        private bool _isResult;
+
         private void buttonMal_Click(object sender, RoutedEventArgs e)
         {
-            click = RechenZeichen.Mal;
-            y = x;
-            x = 0;
-            txtHistory.Text = y.ToString() + " * ";
-            //txtHistory.Text = textMessage;
+            decimal value = decimal.Parse(txtDisplay.Text);
+            Tuple<ICalcFactor, RechenZeichen> item = new Tuple<ICalcFactor, RechenZeichen>(new SimpleCalcFactor(value), RechenZeichen.Mal);
+
+            _zahlen.Add(item);
+            GenerateHistory();
+
         }
         private void buttonPlus_Click(object sender, RoutedEventArgs e)
         {
-            click = RechenZeichen.Plus;
-            y = x;
-            x = 0;
-            txtHistory.Text = y.ToString() + " + ";
-            //txtHistory.Text = textMessage;
+            decimal value = decimal.Parse(txtDisplay.Text);
+            Tuple<ICalcFactor, RechenZeichen> item = new Tuple<ICalcFactor, RechenZeichen>(new SimpleCalcFactor(value), RechenZeichen.Plus);
+
+            _zahlen.Add(item);
+            GenerateHistory();
+
+
         }
         private void buttonMinus_Click(object sender, RoutedEventArgs e)
         {
-            click = RechenZeichen.Minus;
-            y = x;
-            x = 0;
-            txtHistory.Text = y.ToString() + " - ";
-            //txtHistory.Text = textMessage;
+            decimal value = decimal.Parse(txtDisplay.Text);
+            Tuple<ICalcFactor, RechenZeichen> item = new Tuple<ICalcFactor, RechenZeichen>(new SimpleCalcFactor(value), RechenZeichen.Minus);
+
+            _zahlen.Add(item);
+            GenerateHistory();
+
         }
 
         private void buttonGleich_Click(object sender, RoutedEventArgs e)
         {
-            // textMessage = y.ToString() + click + x.ToString();
-            switch (click)
-            {
-                case RechenZeichen.Plus:
-                    textMessage = y.ToString() + " + " + x.ToString() + " =";
-                    x = y + x;
-                    break;
-                case RechenZeichen.Minus:
-                    textMessage = y.ToString() + " - " + x.ToString() + " =";
-                    x = y - x;
-                    break;
-                case RechenZeichen.Mal:
-                    textMessage = y.ToString() + " * " + x.ToString() + " =";
-                    x = y * x;
-                    break;
-                case RechenZeichen.Geteilt:
-                    textMessage = y.ToString() + " / " + x.ToString() + " =";
-                    x = y / x;
-                    break;
-                case RechenZeichen.keinInput:
-                    break;
-            }
-            txtZahl1.Text = x.ToString();
-            txtHistory.Text = textMessage;
-            txtDisplay.Text = "";
+            decimal value = decimal.Parse(txtDisplay.Text);
+            Tuple<ICalcFactor, RechenZeichen> item = new Tuple<ICalcFactor, RechenZeichen>(new SimpleCalcFactor(value), RechenZeichen.Gleich);
 
+            _zahlen.Add(item);
+            GenerateHistory();
+            _zahlen.Clear();
         }
 
         private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)

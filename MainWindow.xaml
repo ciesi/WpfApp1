@@ -37,20 +37,11 @@
         <Button x:Name="btnMinus" Content="-" HorizontalAlignment="Left" Margin="341,257,0,0" VerticalAlignment="Top" Width="41" Height="40" Click="buttonMinus_Click" RenderTransformOrigin="0.445,3.235"/>
         <Button x:Name="btnGeteilt" Content="/" HorizontalAlignment="Left" Margin="341,347,0,0" VerticalAlignment="Top" Width="41" Height="40" Click="buttonGeteilt_Click" RenderTransformOrigin="0.445,3.235"/>
         <Button x:Name="btnGleich" Content="=" HorizontalAlignment="Left" Margin="341,392,0,0" VerticalAlignment="Top" Width="41" Height="40" Click="buttonGleich_Click" RenderTransformOrigin="0.445,3.235"/>
-        <RichTextBox HorizontalAlignment="Left" Height="258" Margin="480,212,0,0" VerticalAlignment="Top" Width="207" TextChanged="RichTextBox_TextChanged">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Label Content="History" HorizontalAlignment="Left" Margin="479,84,0,0" VerticalAlignment="Top" Width="186"/>
         <TextBox x:Name="txtDisplay" HorizontalAlignment="Left" Height="32" Margin="96,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286" TextChanged="txtDisplay_TextChanged"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="728,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="728,143,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <TextBlock x:Name="txtHistory" HorizontalAlignment="Left" Margin="96,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="286"/>
         <TextBlock x:Name="txtZahl1" HorizontalAlignment="Left" Margin="387,84,0,0" TextWrapping="Wrap" Text="Ergebnis" VerticalAlignment="Top" FontSize="24"/>
         <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="186,392,0,0" VerticalAlignment="Top" Width="89" Height="40" Click="buttonClear_Click" RenderTransformOrigin="0.445,3.235"/>
+        <TextBox x:Name="listeFürZahlen" HorizontalAlignment="Left" Height="99" Margin="634,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="298"/>
 
     </Grid>
 </Window>
