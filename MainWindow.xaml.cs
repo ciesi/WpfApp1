@@ -21,82 +21,187 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        double zahl1 = 0;
+
+
+        int x;
+        int y = 0;
+        string textMessage;
+        //string anzeige;
+
+
+        enum RechenZeichen
+        {
+            Plus,
+            Minus,
+            Mal,
+            Geteilt,
+            keinInput,
+            Clear
+        }
+        RechenZeichen click = RechenZeichen.keinInput;
 
         public MainWindow()
         {
             InitializeComponent();
         }
+        // List<int> zahlenAufzählen = new List<int>();
 
+
+
+        void MethodeZahlenTippen(int z)
+        {
+            //x = Convert.ToInt32(textBlock.Text);
+            //List<int> zahlenAufzählen = new List<int>();
+
+            x = x * 10 + z;
+
+
+            // textBlockGleichung.Text = textBlock.Text + anzeige;
+            txtDisplay.Text = x.ToString();
+            //textBlockGleichung.Text = z.ToString();
+            //textMessage = x.ToString();
+            //textBlockGleichung.Text = textMessage;
+
+
+        }
+        private void button0_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(0);
+
+        }
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(1);
+
+        }
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(2);
+
+        }
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(3);
+
+        }
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(4);
+
+        }
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(5);
+        }
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(6);
+        }
+        private void button7_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(7);
+        }
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(8);
+        }
+        private void button9_Click(object sender, RoutedEventArgs e)
+        {
+            MethodeZahlenTippen(9);
+        }
+
+        //////////////////////////////////////////////// RechnenButton
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            click = RechenZeichen.Clear;
+            y = 0;
+            x = 0;
+            txtDisplay.Text = x.ToString();
+            txtHistory.Text = "";
+
+
+        }
+        private void buttonGeteilt_Click(object sender, RoutedEventArgs e)
+        {
+            click = RechenZeichen.Geteilt;
+            y = Convert.ToInt32(txtDisplay.Text);
+            x = 0;
+            textMessage = y.ToString() + " / ";
+            txtHistory.Text = textMessage;
+        }
+        private void buttonMal_Click(object sender, RoutedEventArgs e)
+        {
+            click = RechenZeichen.Mal;
+            y = Convert.ToInt32(txtDisplay.Text);
+            x = 0;
+            textMessage = y.ToString() + " * ";
+            txtHistory.Text = textMessage;
+        }
+        private void buttonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            click = RechenZeichen.Plus;
+            y = Convert.ToInt32(txtDisplay.Text);
+            x = 0;
+            textMessage = y.ToString() + " + ";
+            txtHistory.Text = textMessage;
+        }
+        private void buttonMinus_Click(object sender, RoutedEventArgs e)
+        {
+            click = RechenZeichen.Minus;
+            y = Convert.ToInt32(txtDisplay.Text);
+            x = 0;
+            textMessage = y.ToString() + " - ";
+            txtHistory.Text = textMessage;
+        }
+
+        private void buttonGleich_Click(object sender, RoutedEventArgs e)
+        {
+            // textMessage = y.ToString() + click + x.ToString();
+            switch (click)
+            {
+                case RechenZeichen.Plus:
+                    textMessage = y.ToString() + " + " + x.ToString() + " =";
+                    x = y + x;
+                    break;
+                case RechenZeichen.Minus:
+                    textMessage = y.ToString() + " - " + x.ToString() + " =";
+                    x = y - x;
+                    break;
+                case RechenZeichen.Mal:
+                    textMessage = y.ToString() + " * " + x.ToString() + " =";
+                    x = y * x;
+                    break;
+                case RechenZeichen.Geteilt:
+                    textMessage = y.ToString() + " / " + x.ToString() + " =";
+                    x = y / x;
+                    break;
+                case RechenZeichen.keinInput:
+                    break;
+            }
+            txtZahl1.Text = x.ToString();
+            txtHistory.Text = textMessage;
+
+        }
 
         private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void numbers_Only(object sender, RoutedEventArgs e)
-        {
-            Button b = (Button)sender;
-
-        }
-
-        private void btnClick1(object sender, RoutedEventArgs e)
-        {
-            displayAnzeigen("1");
-        }
-        private void btnClick2(object sender, RoutedEventArgs e)
-        {
-            displayAnzeigen("2");
-        }
-        private void btnClick3(object sender, RoutedEventArgs e)
-        {
-            displayAnzeigen("3");
-        }
-
-        public void displayAnzeigen(string z)
-        {
-            z = txtDisplay.Text + z;
-            txtDisplay.Text = z;
-         
-        }
-        //public void ops(string op)
-        //{
-        //    op =
-        //}
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private double btn_plus(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            txtHistory.Text = txtHistory.Text + txtDisplay.Text + "+";
-            zahl1 = double.Parse(txtDisplay.Text) + zahl1;
-            txtDisplay.Text = "";
-            txtZahl1.Text = Convert.ToString(zahl1);
-            Convert.ToDouble(zahl1);
-            return zahl1;
-            
+
         }
 
-        private double btn_minus(object sender, RoutedEventArgs e)
-        {
-            txtHistory.Text = txtHistory.Text + txtDisplay.Text + "-";
-            zahl1 = double.Parse(txtDisplay.Text) - zahl1;
-            txtDisplay.Text = "";
-            txtZahl1.Text = Convert.ToString(zahl1);
-            Convert.ToDouble(zahl1);
-            return zahl1;
-        }
-
-        private void btn_gleich(object sender, RoutedEventArgs e)
+        private void txtDisplay_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
     }
-
-
-    }
+}
 
