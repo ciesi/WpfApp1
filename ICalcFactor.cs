@@ -25,7 +25,7 @@ namespace WpfApp1
         public string ValuePresentation => Value.ToString();
     }
 
-    public class InnerCalcFactor : ICalcFactor, IList<Tuple<ICalcFactor, RechenZeichen>>
+    public class InnerCalcFactor : Object, ICalcFactor, IList<Tuple<ICalcFactor, RechenZeichen>>
     {
         private IList<Tuple<ICalcFactor, RechenZeichen>> _zahlen = new List<Tuple<ICalcFactor, RechenZeichen>>();
 

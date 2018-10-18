@@ -41,7 +41,6 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-        List<decimal> zahlenErinnern = new List<decimal>();
 
 
         void MethodeZahlenTippen(decimal z)
